@@ -394,14 +394,7 @@ namespace Quasar.Server.Forms
                 if (tag.Type == FileType.File)
                 {
                     string path = GetAbsolutePath(files.SubItems[0].Text);
-
-                    using (var frm = new FrmStartupAdd(path))
-                    {
-                        if (frm.ShowDialog() == DialogResult.OK)
-                        {
-                            _fileManagerHandler.AddToStartup(frm.StartupItem);
-                        }
-                    }
+                    MessageBox.Show("Startup management disabled in this build.");
                 }
             }
         }

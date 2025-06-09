@@ -388,14 +388,6 @@ namespace Quasar.Server.Messages
             _taskManagerHandler.StartProcess(remotePath);
         }
 
-        /// <summary>
-        /// Adds an item to the startup of the client.
-        /// </summary>
-        /// <param name="item">The startup item to add.</param>
-        public void AddToStartup(StartupItem item)
-        {
-            _client.Send(new DoStartupItemAdd {StartupItem = item});
-        }
 
         /// <summary>
         /// Gets the directory contents for the remote path.

@@ -1,0 +1,1 @@
+Orion is intended for authorized security research and administration only. Use on networks or systems without explicit permission is illegal and strictly prohibited.

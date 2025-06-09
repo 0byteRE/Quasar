@@ -36,11 +36,9 @@ namespace Quasar.Server.Forms
             this.systemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.systemInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.startupManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.taskManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.remoteShellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reverseProxyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registryEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.remoteExecuteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.localFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,8 +49,6 @@ namespace Quasar.Server.Forms
             this.restartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.standbyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.surveillanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.passwordRecoveryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.keyloggerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.remoteDesktopToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.userSupportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showMessageboxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -110,11 +106,9 @@ namespace Quasar.Server.Forms
             this.systemToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.systemInformationToolStripMenuItem,
             this.fileManagerToolStripMenuItem,
-            this.startupManagerToolStripMenuItem,
             this.taskManagerToolStripMenuItem,
             this.remoteShellToolStripMenuItem,
             this.connectionsToolStripMenuItem,
-            this.reverseProxyToolStripMenuItem,
             this.registryEditorToolStripMenuItem,
             this.remoteExecuteToolStripMenuItem,
             this.ctxtLine,
@@ -140,13 +134,6 @@ namespace Quasar.Server.Forms
             this.fileManagerToolStripMenuItem.Text = "File Manager";
             this.fileManagerToolStripMenuItem.Click += new System.EventHandler(this.fileManagerToolStripMenuItem_Click);
             // 
-            // startupManagerToolStripMenuItem
-            // 
-            this.startupManagerToolStripMenuItem.Image = global::Quasar.Server.Properties.Resources.application_edit;
-            this.startupManagerToolStripMenuItem.Name = "startupManagerToolStripMenuItem";
-            this.startupManagerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.startupManagerToolStripMenuItem.Text = "Startup Manager";
-            this.startupManagerToolStripMenuItem.Click += new System.EventHandler(this.startupManagerToolStripMenuItem_Click);
             // 
             // taskManagerToolStripMenuItem
             // 
@@ -172,13 +159,6 @@ namespace Quasar.Server.Forms
             this.connectionsToolStripMenuItem.Text = "TCP Connections";
             this.connectionsToolStripMenuItem.Click += new System.EventHandler(this.connectionsToolStripMenuItem_Click);
             // 
-            // reverseProxyToolStripMenuItem
-            // 
-            this.reverseProxyToolStripMenuItem.Image = global::Quasar.Server.Properties.Resources.server_link;
-            this.reverseProxyToolStripMenuItem.Name = "reverseProxyToolStripMenuItem";
-            this.reverseProxyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.reverseProxyToolStripMenuItem.Text = "Reverse Proxy";
-            this.reverseProxyToolStripMenuItem.Click += new System.EventHandler(this.reverseProxyToolStripMenuItem_Click);
             // 
             // registryEditorToolStripMenuItem
             // 
@@ -257,29 +237,13 @@ namespace Quasar.Server.Forms
             // surveillanceToolStripMenuItem
             // 
             this.surveillanceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.passwordRecoveryToolStripMenuItem,
-            this.keyloggerToolStripMenuItem,
+
             this.remoteDesktopToolStripMenuItem2});
             this.surveillanceToolStripMenuItem.Image = global::Quasar.Server.Properties.Resources.monitoring;
             this.surveillanceToolStripMenuItem.Name = "surveillanceToolStripMenuItem";
             this.surveillanceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.surveillanceToolStripMenuItem.Text = "Monitoring";
             // 
-            // passwordRecoveryToolStripMenuItem
-            // 
-            this.passwordRecoveryToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("passwordRecoveryToolStripMenuItem.Image")));
-            this.passwordRecoveryToolStripMenuItem.Name = "passwordRecoveryToolStripMenuItem";
-            this.passwordRecoveryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.passwordRecoveryToolStripMenuItem.Text = "Password Recovery";
-            this.passwordRecoveryToolStripMenuItem.Click += new System.EventHandler(this.passwordRecoveryToolStripMenuItem_Click);
-            // 
-            // keyloggerToolStripMenuItem
-            // 
-            this.keyloggerToolStripMenuItem.Image = global::Quasar.Server.Properties.Resources.keyboard_magnify;
-            this.keyloggerToolStripMenuItem.Name = "keyloggerToolStripMenuItem";
-            this.keyloggerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.keyloggerToolStripMenuItem.Text = "Keylogger";
-            this.keyloggerToolStripMenuItem.Click += new System.EventHandler(this.keyloggerToolStripMenuItem_Click);
             // 
             // remoteDesktopToolStripMenuItem2
             // 
@@ -855,7 +819,6 @@ namespace Quasar.Server.Forms
         private System.Windows.Forms.ColumnHeader hAccountType;
         private System.Windows.Forms.ToolStripMenuItem systemInformationToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader hUserStatus;
-        private System.Windows.Forms.ToolStripMenuItem passwordRecoveryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem remoteShellToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator ctxtLine;
@@ -863,9 +826,6 @@ namespace Quasar.Server.Forms
         private System.Windows.Forms.ToolStripMenuItem shutdownToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem restartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem standbyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem startupManagerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem keyloggerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem reverseProxyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem registryEditorToolStripMenuItem;
         private AeroListView lstClients;
         private System.Windows.Forms.NotifyIcon notifyIcon;
