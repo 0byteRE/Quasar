@@ -1,8 +1,6 @@
 ﻿using Quasar.Client.Config;
-using Quasar.Client.Logging;
 using Quasar.Client.Messages;
 using Quasar.Client.Networking;
-using Quasar.Client.Setup;
 using Quasar.Client.User;
 using Quasar.Client.Utilities;
 using Quasar.Common.DNS;
@@ -38,20 +36,12 @@ namespace Quasar.Client
         /// </summary>
         private readonly List<IMessageProcessor> _messageProcessors;
         
-        /// <summary>
-        /// The background keylogger service used to capture and store keystrokes.
-        /// </summary>
-        private KeyloggerService _keyloggerService;
 
         /// <summary>
         /// Keeps track of the user activity.
         /// </summary>
         private ActivityDetection _userActivityDetection;
 
-        /// <summary>
-        /// Determines whether an installation is required depending on the current and target paths.
-        /// </summary>
-        private bool IsInstallationRequired => Settings.INSTALL && Settings.INSTALLPATH != Application.ExecutablePath;
 
         /// <summary>
         /// Notification icon used to show notifications in the taskbar.
@@ -114,43 +104,8 @@ namespace Quasar.Client
 
             FileHelper.DeleteZoneIdentifier(Application.ExecutablePath);
 
-            var installer = new ClientInstaller();
-
-            if (IsInstallationRequired)
-            {
-                // close mutex before installing the client
-                ApplicationMutex.Dispose();
-
-                try
-                {
-                    installer.Install();
-                    Environment.Exit(3);
-                }
-                catch (Exception e)
-                {
-                    Debug.WriteLine(e);
-                }
-            }
-            else
-            {
-                try
-                {
-                    // (re)apply settings and proceed with connect loop
-                    installer.ApplySettings();
-                }
-                catch (Exception e)
-                {
-                    Debug.WriteLine(e);
-                }
-
-                if (!Settings.UNATTENDEDMODE)
-                    InitializeNotifyicon();
-
-                if (Settings.ENABLELOGGER)
-                {
-                    _keyloggerService = new KeyloggerService();
-                    _keyloggerService.Start();
-                }
+            if (!Settings.UNATTENDEDMODE)
+                InitializeNotifyicon();
 
                 var hosts = new HostsManager(new HostsConverter().RawHostsToList(Settings.HOSTS));
                 _connectClient = new QuasarClient(hosts, Settings.SERVERCERTIFICATE);
@@ -187,15 +142,11 @@ namespace Quasar.Client
         {
             _messageProcessors.Add(new ClientServicesHandler(this, client));
             _messageProcessors.Add(new FileManagerHandler(client));
-            _messageProcessors.Add(new KeyloggerHandler());
             _messageProcessors.Add(new MessageBoxHandler());
-            _messageProcessors.Add(new PasswordRecoveryHandler());
             _messageProcessors.Add(new RegistryHandler());
             _messageProcessors.Add(new RemoteDesktopHandler());
             _messageProcessors.Add(new RemoteShellHandler(client));
-            _messageProcessors.Add(new ReverseProxyHandler(client));
             _messageProcessors.Add(new ShutdownHandler());
-            _messageProcessors.Add(new StartupManagerHandler());
             _messageProcessors.Add(new SystemInformationHandler());
             _messageProcessors.Add(new TaskManagerHandler(client));
             _messageProcessors.Add(new TcpConnectionsHandler());
@@ -237,7 +188,6 @@ namespace Quasar.Client
             if (disposing)
             {
                 CleanupMessageProcessors();
-                _keyloggerService?.Dispose();
                 _userActivityDetection?.Dispose();
                 ApplicationMutex?.Dispose();
                 _connectClient?.Dispose();

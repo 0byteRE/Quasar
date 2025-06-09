@@ -1,7 +1,5 @@
-﻿using Quasar.Client.ReverseProxy;
 using Quasar.Common.Extensions;
 using Quasar.Common.Messages;
-using Quasar.Common.Messages.ReverseProxy;
 using Quasar.Common.Networking;
 using System;
 using System.Collections.Generic;
@@ -148,19 +146,6 @@ namespace Quasar.Client.Networking
         /// </summary>
         public int MAX_MESSAGE_SIZE { get { return (1024 * 1024) * 5; } } // 5MB
 
-        /// <summary>
-        /// Returns an array containing all of the proxy clients of this client.
-        /// </summary>
-        public ReverseProxyClient[] ProxyClients
-        {
-            get
-            {
-                lock (_proxyClientsLock)
-                {
-                    return _proxyClients.ToArray();
-                }
-            }
-        }
 
         /// <summary>
         /// Gets if the client is currently connected to a server.
@@ -178,19 +163,9 @@ namespace Quasar.Client.Networking
         private readonly X509Certificate2 _serverCertificate;
 
         /// <summary>
-        /// A list of all the connected proxy clients that this client holds.
-        /// </summary>
-        private List<ReverseProxyClient> _proxyClients = new List<ReverseProxyClient>();
-
-        /// <summary>
         /// The internal index of the message type.
         /// </summary>
         private int _typeIndex;
-
-        /// <summary>
-        /// Lock object for the list of proxy clients.
-        /// </summary>
-        private readonly object _proxyClientsLock = new object();
 
         /// <summary>
         /// The buffer for incoming messages.
@@ -634,58 +609,10 @@ namespace Quasar.Client.Networking
                 _receiveState = ReceiveType.Header;
                 //_singleWriteMutex.Dispose(); TODO: fix socket re-use by creating new client on disconnect
 
-                if (_proxyClients != null)
-                {
-                    lock (_proxyClientsLock)
-                    {
-                        try
-                        {
-                            foreach (ReverseProxyClient proxy in _proxyClients)
-                                proxy.Disconnect();
-                        }
-                        catch (Exception)
-                        {
-                        }
-                    }
-                }
             }
 
             OnClientState(false);
         }
 
-        public void ConnectReverseProxy(ReverseProxyConnect command)
-        {
-            lock (_proxyClientsLock)
-            {
-                _proxyClients.Add(new ReverseProxyClient(command, this));
-            }
-        }
-
-        public ReverseProxyClient GetReverseProxyByConnectionId(int connectionId)
-        {
-            lock (_proxyClientsLock)
-            {
-                return _proxyClients.FirstOrDefault(t => t.ConnectionId == connectionId);
-            }
-        }
-
-        public void RemoveProxyClient(int connectionId)
-        {
-            try
-            {
-                lock (_proxyClientsLock)
-                {
-                    for (int i = 0; i < _proxyClients.Count; i++)
-                    {
-                        if (_proxyClients[i].ConnectionId == connectionId)
-                        {
-                            _proxyClients.RemoveAt(i);
-                            break;
-                        }
-                    }
-                }
-            }
-            catch { }
-        }
     }
 }

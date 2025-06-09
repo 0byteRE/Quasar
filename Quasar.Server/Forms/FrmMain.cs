@@ -527,15 +527,6 @@ namespace Quasar.Server.Forms
             }
         }
 
-        private void startupManagerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (Client c in GetSelectedClients())
-            {
-                FrmStartupManager frmStm = FrmStartupManager.CreateNewOrGetExisting(c);
-                frmStm.Show();
-                frmStm.Focus();
-            }
-        }
 
         private void taskManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -567,15 +558,6 @@ namespace Quasar.Server.Forms
             }
         }
 
-        private void reverseProxyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Client[] clients = GetSelectedClients();
-            if (clients.Length > 0)
-            {
-                FrmReverseProxy frmRs = new FrmReverseProxy(clients);
-                frmRs.Show();
-            }
-        }
 
         private void registryEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -648,25 +630,6 @@ namespace Quasar.Server.Forms
             }
         }
 
-        private void passwordRecoveryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Client[] clients = GetSelectedClients();
-            if (clients.Length > 0)
-            {
-                FrmPasswordRecovery frmPass = new FrmPasswordRecovery(clients);
-                frmPass.Show();
-            }
-        }
-
-        private void keyloggerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (Client c in GetSelectedClients())
-            {
-                FrmKeylogger frmKl = FrmKeylogger.CreateNewOrGetExisting(c);
-                frmKl.Show();
-                frmKl.Focus();
-            }
-        }
 
         #endregion
 
